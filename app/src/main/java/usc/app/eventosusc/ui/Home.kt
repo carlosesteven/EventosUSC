@@ -1,18 +1,16 @@
 package usc.app.eventosusc.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.jsoup.Jsoup
-import usc.app.eventosusc.volley.MySingleton
 import usc.app.eventosusc.R
 import usc.app.eventosusc.adaptador.INTERFACE_click
 import usc.app.eventosusc.adaptador.RvEvento
@@ -21,12 +19,14 @@ import usc.app.eventosusc.objetos.Eventos
 class Home : AppCompatActivity() {
 
     var recyclerView : RecyclerView? = null
+    var cargando :  ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         recyclerView = findViewById(R.id.lista)
+        cargando = findViewById( R.id.cargando )
 
         recyclerView?.layoutManager = GridLayoutManager( this, 2 )
         recyclerView?.setHasFixedSize(true)
@@ -71,8 +71,8 @@ class Home : AppCompatActivity() {
                 }
             }
         )
+        cargando?.visibility = View.GONE
         recyclerView?.adapter = adaptador
-        ConsolaDebug("usc_debug", "size: " + lista.size )
     }
 
     fun ConsolaDebug(str : String, msg : String )
