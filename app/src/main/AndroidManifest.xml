@@ -19,7 +19,7 @@
                 android:name=".ui.Visor">
         </activity>
         <activity
-                android:label="Proximos Eventos"
+                android:label="Eventos USC"
                 android:name=".ui.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
